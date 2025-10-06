@@ -1,5 +1,6 @@
 package com.calculadora;
 
+//Importamos este paquete para usar la clase Scanner.
 import java.util.Scanner;
 
 /**
@@ -54,6 +55,7 @@ public class CalculadoraMatematica {
     }
     
     //Metodo cambiar valor a los numeros
+    //Esta funcion busca pedirle 2 numeros al usuario y setearlos, estos 2 numeros los declaramos anteriormente como atributos privados de la clase
     public void ingresarNumeros() {
         Scanner input = new Scanner(System.in);
         System.out.print("Ingrese un numero: ");
@@ -65,43 +67,59 @@ public class CalculadoraMatematica {
     
     //main
     public static void main(String[] args) {
+        //Intanciamos la clase "CalculadoraMatematica" para poder utilizar los metodos.
+        //Tambien intanciamos la clase Scanner para poder ingresar datos por consola.
         Scanner input = new Scanner(System.in);
         CalculadoraMatematica menu = new CalculadoraMatematica();
         
+        //Declaramos la variable opcion y la inicializamos con -1 pero luego se le asignara un valor dado por el usuario.
         int opcion = -1;
         do {
+            //Mostramos el menu por consola. "\n" representa un salto de linea.
             System.out.println("-- MENU --\n1. Ingresar numeros.\n2. Sumar.\n3. Restar.\n4. Multiplicar\n5. Dividir.\n0. Salir.\n\nIngrese una opcion:");
+            
+            //Aqui el usuario segun el menu, seleccionara una opcion
             opcion = input.nextInt();
+            //Estas variables seran las que se pasaran como parametros en las funciones. Con menu.getNum() se le asigna el valor que tengan eses atributos.
             double numero1 = menu.getNum1();
             double numero2 = menu.getNum2();
             
+            //En este switch el programa entrara en uno de los cases, segun la opcion que el usuario le ingreso por consola.
+            //En caso de que no este especificada la opcion que el usuario ingreso, se ejecutara el bloque de codigo del "default"
             switch(opcion) {
                     
                 case 1:
+                    //En esta opcion se llama al metodo para darle un valor a los numeros con los cuales operamos.
                     menu.ingresarNumeros();
                     numero1 = menu.getNum1();
                     numero2 = menu.getNum2();
                     break;
                 case 2:
+                    //En esta opcion llamamos el metodo suma pasandole por parametro los numeros previamente seteados y mostramos en consola.
                     System.out.println("El resultado de la suma es: "+menu.suma(numero1,numero2));
                     break;
                 case 3:
+                    //En esta opcion llamamos el metodo resta pasandole por parametro los numeros previamente seteados y mostramos en consola.
                     System.out.println("El resultado de la resta es: "+menu.resta(numero1,numero2));
                     break;
                 case 4:
+                    //En esta opcion llamamos el metodo multiplicacion pasandole por parametro los numeros previamente seteados y mostramos en consola.
                     System.out.println("El resultado de la multiplicacion es: "+menu.multiplicacion(numero1,numero2));
                     break;
                 case 5:
+                    //En esta opcion llamamos el metodo division pasandole por parametro los numeros previamente seteados y mostramos en consola.
+                    //Tenemos una validacion que valida si el segundo numero es igual a 0, si es asi muestra un mensaje de error, de lo contrario, muestra el resultado.
                     if(menu.getNum2() == 0) System.out.println("Error. No se puede dividir entre 0");
                     else System.out.println("El resultado de la division es: "+menu.division(numero1,numero2));
                     break;
                 case 0:
+                    //en caso de el usuario ingresar 0, se mostrara este mensaje y posteriormente se cerrara el programa. 
+                    System.out.println("Programa finalizado!");
                     break;
                 default:
                     System.out.println("Error. Opcion no valida.");
                     break;
             }
         } while(opcion != 0);
-        System.out.println("Programa finalizado!");
     }
 }
